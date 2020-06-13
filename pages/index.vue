@@ -1,17 +1,19 @@
 <template>
-  <div class="container">
-    <div>
-      <play-radio />
-    </div>
+  <div>
+    <the-header />
+
+    <radio-player />
   </div>
 </template>
 
 <script>
-import playRadio from "~/components/PlayRadio.vue";
+import RadioPlayer from "~/components/RadioPlayer.vue";
+import TheHeader from "~/components/_header.vue";
 
 export default {
   components: {
-    playRadio
+    TheHeader,
+    RadioPlayer
   }
 };
 </script>
