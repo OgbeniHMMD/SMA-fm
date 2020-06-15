@@ -1,12 +1,12 @@
 <template>
   <section
-    class="bg-primary d-flex flex-column justify-content-center align-items-center min-vh-100 m-0 my-auto"
+    class="bg-primary d-flex flex-column justify-content-center align-items-center min-vh-100 m-0 my-auto p-2"
     style="background: url(http://www.radionigerialive.com/listen/123ertf/radiong_pp_2fd25dbbe6d6b5bdbca7636d9aa67298.png)"
   >
     <audio id="player" :src="radio.url"></audio>
 
     <div
-      class="bg-primary col-11 col-md-10 col-lg-8 border border-lg shadow-lg p-2 p-md-4"
+      class="bg-primary col-12 col-md-10 col-lg-8 border border-lg shadow-lg p-2 p-md-4"
       style="background-image: url('https://www.transparenttextures.com/patterns/otis-redding.png')"
     >
       <div class="d-flex align-items-center text-light">
@@ -39,7 +39,7 @@
 
       <div
         id="speaker"
-        class="bg-primary border rounded-lg text-center shadow p-4"
+        class="bg-dark border rounded-lg text-center shadow p-4"
         style="background-image: url('https://www.transparenttextures.com/patterns/bo-play.png')"
       >
         <div class="p-4">
@@ -55,24 +55,30 @@
         </div>
       </div>
 
-      <div
-        class="d-flex flex-column flex-md-row justify-content-between align-items-center text-light"
-      >
-        <div class="mt-2 text-monospace">
-          <b-icon-phone class="mr1"></b-icon-phone>
-          <span>+234 818 8881 067</span>
+      <div class="d-flex flex-row justify-content-between align-items-center text-light">
+        <div class="text-monospace">
+          <div class="mt-1">
+            <b-icon-phone></b-icon-phone>
+            <span>+234 818 8881 067</span>
+          </div>
 
-          <b-icon-phone class="mx-"></b-icon-phone>
-          <span>+234 909 1111 049</span>
+          <div class="mt-1">
+            <b-icon-phone></b-icon-phone>
+            <span>+234 909 1111 049</span>
+          </div>
         </div>
         <div class="mt-2">
-          <a href="#" class="mx-2 text-light" title="Twitter">
+          <a href="https://twitter.com/1047SMAFM" class="mx-2 text-light" title="Twitter">
             <b-icon-link45deg font-scale="2"></b-icon-link45deg>
           </a>
-          <a href="#" class="mx-2 text-light" title="Facebok">
-            <b-icon-droplet-half font-scale="2"></b-icon-droplet-half>
+          <a
+            title="Facebok"
+            class="mx-2 text-light"
+            href="https://web.facebook.com/1047-SMA-FM-119944118571102"
+          >
+            <b-icon-link45deg font-scale="2"></b-icon-link45deg>
           </a>
-          <a href="#" class="mx-2 text-light" title="Github">
+          <a href="https://github.com/OgbeniHMMD/SMA-fm" class="mx-2 text-light" title="Github">
             <b-icon-link45deg font-scale="2"></b-icon-link45deg>
           </a>
         </div>
