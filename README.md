@@ -1,6 +1,6 @@
 # sma-fm
 
-> 104.7FM &amp;mdash; Your Learning Frequency!
+> 104.7FM &mdash; Your Learning Frequency!
 
 ## Build Setup
 
