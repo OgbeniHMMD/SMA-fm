@@ -1,16 +1,28 @@
 <template>
   <section
-    class="bg-primary d-flex flex-column justify-content-center align-items-center min-vh-100 m-0 my-auto p-2"
+    class="bg-primary d-flex flex-column justify-content-center align-items-center min-vh-100 m-0 my-auto"
     style="background: url(http://www.radionigerialive.com/listen/123ertf/radiong_pp_2fd25dbbe6d6b5bdbca7636d9aa67298.png)"
   >
-    <audio id="player" :src="radio.url"></audio>
+    <audio
+      ref="player"
+      :src="radioUrl"
+      @pause="eventPause"
+      @ended="eventOffline"
+      @onerror="eventOffline"
+      @waiting="eventWaiting"
+      @playing="eventPlaying"
+    ></audio>
 
     <div
-      class="bg-primary col-12 col-md-10 col-lg-8 border border-lg shadow-lg p-2 p-md-4"
+      id="radio"
+      class="bg-primary col-12 col-md-10 col-lg-8 shadow-lg p-md-4 p-0 border"
       style="background-image: url('https://www.transparenttextures.com/patterns/otis-redding.png')"
     >
       <div class="d-flex align-items-center text-light">
-        <div class="bg-primary d-flex flex-column flex-md-row w-100 border rounded shadow m-0 mb-4">
+        <div
+          class="bg-dark d-flex flex-column flex-md-row w-100 border rounded shadow m-0 mb-4"
+          style="background-image: url('https://www.transparenttextures.com/patterns/black-mamba.png')"
+        >
           <div
             class="col-12 col-md-3 d-flex flex-md-column text-monospace text-left p-2 p-md-3 mr-4"
           >
@@ -21,12 +33,13 @@
           <div class="col text-light text-md-right p-2 p-md-3">
             <div class="d-flex align-items-center">
               <div class="d-flex flex-column text-monospace w-100 p-0">
-                <div class="font-weight-bold">{{ radio.status.split('/')[0] }}</div>
-                <div class="text-nowrap overflow-hidden">{{ radio.status.split('/')[1] }}</div>
+                <div class="font-weight-bold">{{ radioStatus.split('/')[0] }}</div>
+                <div class="text-nowrap overflow-hidden">{{ radioStatus.split('/')[1] }}</div>
               </div>
-              <a @click="togglePlay(radio.toggle)" class="d-none d-sm-inline">
+
+              <a @click="toggleSwitch()">
                 <b-icon
-                  :icon="radio.toggle ? 'toggle-on' : 'toggle-off'"
+                  :icon="radioToggle ? 'toggle-on' : 'toggle-off'"
                   variant="light"
                   font-scale="3"
                   class="ml-md-3"
@@ -44,9 +57,9 @@
       >
         <div class="p-4">
           <div class="d-flex flex-column justify-content-between text-white p-4">
-            <a @click="togglePlay(radio.toggle)" class="text-white" title="ON / OFF">
+            <a @click="toggleSwitch()" class="text-white" title="ON / OFF">
               <b-icon
-                :icon="radio.toggle ? 'volume-mute-fill' : 'play-fill'"
+                :icon="radioToggle ? 'volume-mute-fill' : 'play-fill'"
                 animation="throb"
                 font-scale="7"
               ></b-icon>
@@ -56,7 +69,7 @@
       </div>
 
       <div class="d-flex flex-row justify-content-between align-items-center text-light">
-        <div class="text-monospace">
+        <div class="text-monospace mt-3 m-md-0">
           <div class="mt-1">
             <b-icon-phone></b-icon-phone>
             <span>+234 818 8881 067</span>
@@ -91,35 +104,51 @@
 export default {
   data: function() {
     return {
-      radio: {
-        toggle: false,
-        //url: "/test.mp3",
-        url: "http://192.99.170.8:5034/listen.mp3",
-        status: "OFF/Press play"
-      }
+      radioToggle: false,
+      radioStatus: "OFF/Press play",
+      radioUrl: "/test.mp3" // "https://192.99.170.8:5034/listen.mp3"
     };
   },
 
   methods: {
-    togglePlay: function() {
-      const player = document.getElementById("player");
-
-      if (this.radio.toggle) {
-        player.pause();
-        this.radio.status = "OFF/Press play";
+    toggleSwitch: function() {
+      // Toggle Radio on/off
+      if (this.radioToggle) {
+        this.$refs.player.pause();
       } else {
-        player
-          .play()
-          .then(() => {
-            this.radio.status = "On Air/Gbarada by Yemi Shodimu";
-          })
-          .catch(() => {
-            this.radio.status = "Opps!/ It seems we are Offline";
-          });
-      }
+        // start playing radio.
+        const playPromise = this.$refs.player.play();
 
-      //toggle pause /play
-      this.radio.toggle = !player.paused;
+        if (playPromise !== undefined) {
+          playPromise
+            .then(_ => {
+              this.eventPlaying(); // Show (on-air) program details
+            })
+            .catch(error => {
+              this.eventOffline(); // show error message
+            });
+        }
+      }
+    },
+
+    eventWaiting: function() {
+      this.radioStatus = "Loading/Please wait";
+    },
+
+    eventPlaying: function() {
+      this.radioToggle = true;
+      this.radioStatus = "On Air/Gbarada by Yemi Shodimu bla bla bla";
+    },
+
+    eventPause: function() {
+      this.$refs.player.currentTime = 0;
+      this.radioToggle = false;
+      this.radioStatus = "OFF/Press play";
+    },
+
+    eventOffline: function() {
+      this.$refs.player.pause();
+      this.radioStatus = "Oops!/We are offline";
     }
   }
 };

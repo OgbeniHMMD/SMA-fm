@@ -1,8 +1,11 @@
 body {
-  font-family: "Roboto", $font-family-sans-serif;
+  //! Assign proper monospace font
+  font-family: "Share+Tech+Mono", $font-family-monospace;
 }
 
-.border-lg {
-  border-width: 0.5rem !important;
-  border-radius: 2rem !important;
+@include media-breakpoint-up(md) {
+  #radio {
+    border-radius: 2rem !important;
+    border: solid 0.3rem $border-color !important;
+  }
 }

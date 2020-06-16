@@ -14,13 +14,7 @@ export default {
         content: process.env.npm_package_description || ""
       }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
-    link: [
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/icon?family=Roboto"
-      }
-    ]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
   /*
    ** Customize the progress-bar color
@@ -44,12 +38,18 @@ export default {
   modules: [
     // Doc: https://bootstrap-vue.js.org
     "bootstrap-vue/nuxt",
-    "@nuxtjs/pwa"
+    "@nuxtjs/pwa",
+    "nuxt-webfontloader"
   ],
   bootstrapVue: {
     bootstrapCSS: false,
     bootstrapVueCSS: false,
     icons: true
+  },
+  webfontloader: {
+    google: {
+      families: ["Share+Tech+Mono&display=swap"]
+    }
   },
   /*
    ** Build configuration
