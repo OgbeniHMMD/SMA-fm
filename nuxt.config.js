@@ -4,7 +4,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: process.env.npm_package_name || "",
+    title: process.env.npm_package_description,
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -35,12 +35,7 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [
-    // Doc: https://bootstrap-vue.js.org
-    "bootstrap-vue/nuxt",
-    "@nuxtjs/pwa",
-    "nuxt-webfontloader"
-  ],
+  modules: ["bootstrap-vue/nuxt", "@nuxtjs/pwa", "nuxt-webfontloader"],
   bootstrapVue: {
     bootstrapCSS: false,
     bootstrapVueCSS: false,

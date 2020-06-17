@@ -1,7 +1,7 @@
 {
   "name": "sma-fm",
-  "version": "0.0.1",
-  "description": "104.7FM — Your Learning Frequency!",
+  "version": "0.0.2",
+  "description": "S.M.A 104.7FM — Your Learning Frequency!",
   "author": "Olajide A. Hammed",
   "private": true,
   "scripts": {

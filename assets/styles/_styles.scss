@@ -1,7 +1,4 @@
-body {
-  //! Assign proper monospace font
-  font-family: "Share+Tech+Mono", $font-family-monospace;
-}
+// show radio radius and border on tablet or bigger devices
 
 @include media-breakpoint-up(md) {
   #radio {

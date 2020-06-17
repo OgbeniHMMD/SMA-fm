@@ -1,15 +1,15 @@
 <template>
-  <div>
-    <radio-player />
-  </div>
+	<div>
+		<radio-player />
+	</div>
 </template>
 
 <script>
 import RadioPlayer from "~/components/RadioPlayer.vue";
 
 export default {
-  components: {
-    RadioPlayer
-  }
+	components: {
+		RadioPlayer
+	}
 };
 </script>

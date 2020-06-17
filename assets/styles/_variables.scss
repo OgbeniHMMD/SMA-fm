@@ -5,3 +5,8 @@ $border-width: 0.1rem;
 
 $enable-shadows: true;
 $enable-responsive-font-sizes: true;
+
+$font-family-monospace: "Share Tech Mono", SFMono-Regular, Menlo, Monaco,
+  Consolas, "Liberation Mono", "Courier New", monospace;
+
+$font-family-base: $font-family-monospace !default;
