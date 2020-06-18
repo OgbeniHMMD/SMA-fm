@@ -4,7 +4,7 @@
 		style="background: url('/textures/radiong_pp_2fd25dbbe6d6b5bdbca7636d9aa67298.png')"
 	>
 		<audio
-			ref="player"
+			ref="radioPlayer"
 			:src="radioUrl"
 			@pause="eventPause"
 			@ended="eventOffline"
@@ -12,6 +12,8 @@
 			@waiting="eventWaiting"
 			@playing="eventPlaying"
 		></audio>
+
+		<audio ref="tonePlayer" :src="toneUrl"></audio>
 
 		<div
 			id="radio"
@@ -64,7 +66,7 @@
 				class="d-flex flex-column flex-md-row justify-content-between align-items-center text-light my-3 m-md-0"
 			>
 				<div class="mt-1">
-					<b-icon-phone></b-icon-phone>
+					<i class="fas fa-phone-alt"></i>
 					<span>+234 818 8881 067,</span>
 					<span>(0)909 1111 049</span>
 				</div>
@@ -94,18 +96,22 @@ export default {
 		return {
 			radioToggle: false,
 			radioStatus: "OFF/Press play",
-			radioUrl: "https://192.99.170.8:5034/listen.mp3"
+			//radioUrl: "http://192.99.170.8:5034/listen.mp3"
+			radioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+
+			toneUrl: "/tones/switch.mp3"
 		};
 	},
 
 	methods: {
 		toggleSwitch: function() {
-			// Toggle Radio on/off
+			// Play switch tone
+			this.playTone("switch");
+
 			if (this.radioToggle) {
-				this.$refs.player.pause();
+				this.$refs.radioPlayer.pause();
 			} else {
-				// start playing radio.
-				const playPromise = this.$refs.player.play();
+				const playPromise = this.$refs.radioPlayer.play(); // start playing radio.
 
 				if (playPromise !== undefined) {
 					playPromise
@@ -113,11 +119,28 @@ export default {
 							this.eventPlaying(); // Show (on-air) program details
 						})
 						.catch(error => {
-							"/test.mp3"; //
-							this.eventOffline(); // show error message
+							this.eventOffline(); // Show error message
 						});
 				}
 			}
+		},
+
+		playTone(tone) {
+			switch (tone) {
+				case "switch":
+					this.toneUrl = "/tones/switch.mp3";
+					break;
+
+				case "error":
+					this.toneUrl = "/tones/error.mp3";
+					break;
+
+				default:
+					this.toneUrl = "/tones/switch.mp3";
+					break;
+			}
+
+			this.$refs.tonePlayer.play();
 		},
 
 		eventWaiting: function() {
@@ -130,13 +153,14 @@ export default {
 		},
 
 		eventPause: function() {
-			this.$refs.player.currentTime = 0;
 			this.radioToggle = false;
+			this.$refs.radioPlayer.currentTime = 0;
 			this.radioStatus = "OFF/Press play";
 		},
 
 		eventOffline: function() {
-			this.$refs.player.pause();
+			playTone("error");
+			this.$refs.radioPlayer.pause();
 			this.radioStatus = "Oops!/We are offline";
 		}
 	}
