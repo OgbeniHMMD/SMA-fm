@@ -13,8 +13,6 @@
 			@playing="eventPlaying"
 		></audio>
 
-		<audio ref="tonePlayer" :src="toneUrl"></audio>
-
 		<div
 			id="radio"
 			class="bg-primary col-12 col-md-10 col-lg-8 shadow-lg p-2 p-md-4 d-flex flex-column vh-100 vh-md-75"
@@ -33,8 +31,8 @@
 					<div class="col text-light text-md-right p-1 p-md-3">
 						<div class="row m-0">
 							<div class="col p-0 text-monospace">
-								<div class="font-weight-bold">{{ radioStatus.split('/')[0] }}</div>
-								<div class="text-truncate mw-100">{{ radioStatus.split('/')[1] }}</div>
+								<div class="font-weight-bold">{{ radioStatus.title }}</div>
+								<div class="text-truncate mw-100">{{ radioStatus.msg }}</div>
 							</div>
 
 							<div class="col-2 col-md-1 p-0 text-right">
@@ -95,11 +93,13 @@ export default {
 	data: function() {
 		return {
 			radioToggle: false,
-			radioStatus: "OFF/Press play",
 			//radioUrl: "http://192.99.170.8:5034/listen.mp3"
 			radioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
 
-			toneUrl: "/tones/switch.mp3"
+			toneUrl: "/tones/switch.mp3",
+			loading: false,
+
+			radioStatus: { loading: false, title: "Welcome", msg: "Press play" }
 		};
 	},
 
@@ -111,7 +111,8 @@ export default {
 			if (this.radioToggle) {
 				this.$refs.radioPlayer.pause();
 			} else {
-				const playPromise = this.$refs.radioPlayer.play(); // start playing radio.
+				// start playing radio.
+				const playPromise = this.$refs.radioPlayer.play();
 
 				if (playPromise !== undefined) {
 					playPromise
@@ -140,28 +141,46 @@ export default {
 					break;
 			}
 
-			this.$refs.tonePlayer.play();
+			const audio = new Audio(this.toneUrl);
+			audio.play();
 		},
 
 		eventWaiting: function() {
-			this.radioStatus = "Loading/Please wait";
+			this.loading = true;
+			this.radioStatus = {
+				loading: false,
+				title: "Loading",
+				msg: "Please, Wait. . ."
+			};
 		},
 
 		eventPlaying: function() {
 			this.radioToggle = true;
-			this.radioStatus = "On Air/Reflections At Sunset";
+			this.radioStatus = {
+				loading: false,
+				title: "On Air",
+				msg: "Reflections At Sunset With Father Abraham"
+			};
 		},
 
 		eventPause: function() {
 			this.radioToggle = false;
 			this.$refs.radioPlayer.currentTime = 0;
-			this.radioStatus = "OFF/Press play";
+			this.radioStatus = {
+				loading: false,
+				title: "OFF",
+				msg: "Press play"
+			};
 		},
 
 		eventOffline: function() {
-			playTone("error");
+			this.playTone("error");
 			this.$refs.radioPlayer.pause();
-			this.radioStatus = "Oops!/We are offline";
+			this.radioStatus = {
+				loading: false,
+				title: "Oops!",
+				msg: "We are offline"
+			};
 		}
 	}
 };
