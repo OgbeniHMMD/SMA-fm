@@ -91,8 +91,8 @@ export default {
 	data: function() {
 		return {
 			radioToggle: false,
-			radioUrl: "http://192.99.170.8:5034/listen.mp3",
-			// radioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+			// radioUrl: "http://192.99.170.8:5034/listen.mp3",
+			radioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
 
 			radioStatus: { waiting: false, title: "Welcome", msg: "Press play" }
 		};
@@ -115,7 +115,7 @@ export default {
 							this.eventPlaying(); // Show (on-air) program details
 						})
 						.catch(error => {
-							// this.eventOffline(); // Show error message
+							this.eventOffline(); // Show error message
 						});
 				}
 			}
