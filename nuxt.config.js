@@ -38,8 +38,7 @@ export default {
   modules: ["bootstrap-vue/nuxt", "@nuxtjs/pwa", "nuxt-webfontloader"],
   bootstrapVue: {
     bootstrapCSS: false,
-    bootstrapVueCSS: false,
-    icons: true
+    bootstrapVueCSS: false
   },
   webfontloader: {
     google: {

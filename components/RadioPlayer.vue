@@ -25,7 +25,9 @@
 				>
 					<div class="col-12 col-md-3 d-flex flex-md-column text-left p-2 p-md-3 mr-4">
 						<div class="font-weight-bold text-warning">104.7 MHz</div>
-						<div class="ml-auto ml-md-0">S.M.A FM</div>
+						<div class="ml-auto ml-md-0">
+							<i class="fas fa-star"></i> S.M.A FM
+						</div>
 					</div>
 
 					<div class="col text-light text-md-right p-1 p-md-3">
@@ -35,9 +37,9 @@
 								<div class="text-truncate mw-100">{{ radioStatus.msg }}</div>
 							</div>
 
-							<div class="col-2 col-md-1 p-0 text-right">
+							<div class="col-2 col-md-1 p-0 mx-1 text-right">
 								<a @click="toggleSwitch()">
-									<b-icon :icon="radioToggle ? 'toggle-on' : 'toggle-off'" variant="light" font-scale="3"></b-icon>
+									<i class="fas fa-3x" :class="radioToggle ? 'fa-toggle-on' : 'fa-toggle-off'"></i>
 								</a>
 							</div>
 						</div>
@@ -50,13 +52,9 @@
 				class="bg-dark flex-grow-1 d-flex flex-column justify-content-center align-items-center border rounded-lg text-center shadow p-4"
 				style="background-image: url('/textures/bo-play.png')"
 			>
-				<a @click="toggleSwitch()" title="ON / OFF">
-					<b-icon
-						:icon="radioToggle ? 'volume-mute-fill' : 'play-fill'"
-						class="text-white"
-						animation="throb"
-						font-scale="7"
-					></b-icon>
+				<a @click="toggleSwitch()" title="ON / OFF" class="text-light">
+					<i v-if="radioStatus.waiting" class="fas fa-spinner fa-spin fa-4x"></i>
+					<i v-else class="fas fa-4x" :class="radioToggle ? 'fa-volume-mute' : 'fa-play'"></i>
 				</a>
 			</div>
 
@@ -93,13 +91,10 @@ export default {
 	data: function() {
 		return {
 			radioToggle: false,
-			//radioUrl: "http://192.99.170.8:5034/listen.mp3"
-			radioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+			radioUrl: "http://192.99.170.8:5034/listen.mp3",
+			// radioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
 
-			toneUrl: "/tones/switch.mp3",
-			loading: false,
-
-			radioStatus: { loading: false, title: "Welcome", msg: "Press play" }
+			radioStatus: { waiting: false, title: "Welcome", msg: "Press play" }
 		};
 	},
 
@@ -126,30 +121,21 @@ export default {
 			}
 		},
 
-		playTone(tone) {
-			switch (tone) {
-				case "switch":
-					this.toneUrl = "/tones/switch.mp3";
-					break;
+		playTone(option) {
+			// Get appropriate feedback tone
+			let toneUrl = "/tones/switch.mp3";
+			if (option == "error") toneUrl = "/tones/error.mp3";
 
-				case "error":
-					this.toneUrl = "/tones/error.mp3";
-					break;
-
-				default:
-					this.toneUrl = "/tones/switch.mp3";
-					break;
-			}
-
-			const audio = new Audio(this.toneUrl);
+			// Play feedback tone
+			const audio = new Audio(toneUrl);
 			audio.play();
 		},
 
 		eventWaiting: function() {
-			this.loading = true;
+			this.waiting = true;
 			this.radioStatus = {
-				loading: false,
-				title: "Loading",
+				waiting: true,
+				title: "waiting",
 				msg: "Please, Wait. . ."
 			};
 		},
@@ -157,7 +143,7 @@ export default {
 		eventPlaying: function() {
 			this.radioToggle = true;
 			this.radioStatus = {
-				loading: false,
+				waiting: false,
 				title: "On Air",
 				msg: "Reflections At Sunset With Father Abraham"
 			};
@@ -167,7 +153,7 @@ export default {
 			this.radioToggle = false;
 			this.$refs.radioPlayer.currentTime = 0;
 			this.radioStatus = {
-				loading: false,
+				waiting: false,
 				title: "OFF",
 				msg: "Press play"
 			};
@@ -177,9 +163,9 @@ export default {
 			this.playTone("error");
 			this.$refs.radioPlayer.pause();
 			this.radioStatus = {
-				loading: false,
-				title: "Oops!",
-				msg: "We are offline"
+				waiting: false,
+				title: "Something went wrong",
+				msg: "Maybe we are offline"
 			};
 		}
 	}
