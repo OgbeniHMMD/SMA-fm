@@ -4,11 +4,11 @@
 		style="background: url('/textures/radiong_pp_2fd25dbbe6d6b5bdbca7636d9aa67298.png')"
 	>
 		<audio
-			ref="radioPlayer"
 			:src="radioUrl"
+			ref="radioPlayer"
 			@pause="eventPause"
 			@ended="eventOffline"
-			@onerror="eventOffline"
+			@error="eventOffline"
 			@waiting="eventWaiting"
 			@playing="eventPlaying"
 		></audio>
@@ -91,44 +91,27 @@ export default {
 	data: function() {
 		return {
 			radioToggle: false,
-			// radioUrl: "http://192.99.170.8:5034/listen.mp3",
-			radioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-
+			radioUrl: "http://192.99.170.8:5034/listen.mp3",
 			radioStatus: { waiting: false, title: "Welcome", msg: "Press play" }
+
+			// radioUrl: "/tones/test.mp3",
+			//radioUrl: "http://ice64.securenetsystems.net/LAGELU",
 		};
 	},
 
 	methods: {
 		toggleSwitch: function() {
-			// Play switch tone
-			this.playTone("switch");
+			this.beep(); // Play switch tone
 
 			if (this.radioToggle) {
 				this.$refs.radioPlayer.pause();
 			} else {
-				// start playing radio.
-				const playPromise = this.$refs.radioPlayer.play();
-
-				if (playPromise !== undefined) {
-					playPromise
-						.then(_ => {
-							this.eventPlaying(); // Show (on-air) program details
-						})
-						.catch(error => {
-							this.eventOffline(); // Show error message
-						});
-				}
+				this.$refs.radioPlayer.play();
 			}
 		},
 
-		playTone(option) {
-			// Get appropriate feedback tone
-			let toneUrl = "/tones/switch.mp3";
-			if (option == "error") toneUrl = "/tones/error.mp3";
-
-			// Play feedback tone
-			const audio = new Audio(toneUrl);
-			audio.play();
+		beep(url = "/tones/switch.mp3") {
+			const audio = new Audio(url).play();
 		},
 
 		eventWaiting: function() {
@@ -160,7 +143,7 @@ export default {
 		},
 
 		eventOffline: function() {
-			this.playTone("error");
+			this.beep("/tones/error.mp3");
 			this.$refs.radioPlayer.pause();
 			this.radioStatus = {
 				waiting: false,
