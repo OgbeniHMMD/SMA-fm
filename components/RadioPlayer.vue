@@ -6,6 +6,7 @@
 		<audio
 			:src="radioUrl"
 			ref="radioPlayer"
+			preload="none"
 			@pause="eventPause"
 			@ended="eventOffline"
 			@error="eventOffline"
@@ -91,11 +92,10 @@ export default {
 	data: function() {
 		return {
 			radioToggle: false,
-			radioUrl: "http://192.99.170.8:5034/listen.mp3",
-			radioStatus: { waiting: false, title: "Welcome", msg: "Press play" }
+			radioStatus: { waiting: false, title: "Welcome", msg: "Press play" },
 
-			// radioUrl: "/tones/test.mp3",
-			//radioUrl: "http://ice64.securenetsystems.net/LAGELU",
+			//radioUrl: "/tones/test.mp3",
+			radioUrl: "http://192.99.170.8:5034/listen.mp3"
 		};
 	},
 
@@ -106,6 +106,7 @@ export default {
 			if (this.radioToggle) {
 				this.$refs.radioPlayer.pause();
 			} else {
+				this.$refs.radioPlayer.src = this.radioUrl;
 				this.$refs.radioPlayer.play();
 			}
 		},
@@ -118,7 +119,7 @@ export default {
 			this.waiting = true;
 			this.radioStatus = {
 				waiting: true,
-				title: "waiting",
+				title: "Loading",
 				msg: "Please, Wait. . ."
 			};
 		},
@@ -128,13 +129,16 @@ export default {
 			this.radioStatus = {
 				waiting: false,
 				title: "On Air",
-				msg: "Reflections At Sunset With Father Abraham"
+				msg: "Your Learning Frequency"
 			};
 		},
 
 		eventPause: function() {
+			// STOP the player
 			this.radioToggle = false;
 			this.$refs.radioPlayer.currentTime = 0;
+			this.$refs.radioPlayer.src = "/tones/switch.mp3"; // set a dummy source
+
 			this.radioStatus = {
 				waiting: false,
 				title: "OFF",
@@ -144,7 +148,6 @@ export default {
 
 		eventOffline: function() {
 			this.beep("/tones/error.mp3");
-			this.$refs.radioPlayer.pause();
 			this.radioStatus = {
 				waiting: false,
 				title: "Something went wrong",
