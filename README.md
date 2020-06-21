@@ -1,22 +1,7 @@
-# sma-fm
+# Unofficial Radio Player For SMA FM &mdash; 104.7FM
 
-> 104.7FM &mdash; Your Learning Frequency!
+![screenshot](https://sma.hmmd.xyz/screenshot.png)
 
-## Build Setup
+This is an unofficial radio player for SMA FM.
 
-```bash
-# install dependencies
-$ npm install
-
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
-```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+[Click here](https://sma.hmmd.xyz) to see it live in action ☺
