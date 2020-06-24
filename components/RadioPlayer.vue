@@ -95,7 +95,7 @@ export default {
 			radioStatus: { waiting: false, title: "Welcome", msg: "Press play" },
 
 			//radioUrl: "/tones/test.mp3",
-			radioUrl: "http://192.99.170.8:5034/listen.mp3"
+			radioUrl: "https://node-21.zeno.fm/w7gvnqys01zuv?rj-ttl=5&rj-tok=AAABcufcftMAiqt2sfW9YjVF_w"
 		};
 	},
 
