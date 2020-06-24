@@ -1,6 +1,6 @@
 <template>
 	<section
-		class="bg-primary d-flex flex-column justify-content-center align-items-center min-vh-100 m-0 my-auto"
+		class="bg-dark d-flex flex-column justify-content-center align-items-center min-vh-100 m-0 my-auto"
 		style="background: url('/textures/radiong_pp_2fd25dbbe6d6b5bdbca7636d9aa67298.png')"
 	>
 		<audio
@@ -21,14 +21,14 @@
 		>
 			<div class="d-flex align-items-center text-light">
 				<div
-					class="row bg-dark d-flex flex-column flex-md-row w-100 border rounded-lg shadow m-0 mb-4"
+					class="row bg-primary d-flex flex-column flex-md-row w-100 border rounded-lg shadow m-0 mb-4"
 					style="background-image: url('/textures/black-mamba.png')"
 				>
 					<div class="col-12 col-md-3 d-flex flex-md-column text-left p-2 p-md-3 mr-4">
-						<div class="font-weight-bold text-warning">104.7 MHz</div>
-						<div class="ml-auto ml-md-0">
-							<i class="fas fa-star"></i> S.M.A FM
+						<div class="font-weight-bold">
+							<i class="fas fa-globe"></i> 107.5 MHz
 						</div>
+						<div class="ml-auto ml-md-0">Radio Lagos</div>
 					</div>
 
 					<div class="col text-light text-md-right p-1 p-md-3">
@@ -39,7 +39,7 @@
 							</div>
 
 							<div class="col-2 col-md-1 p-0 mx-1 text-right">
-								<a @click="toggleSwitch()">
+								<a @click="toggleSwitch()" title="Switch">
 									<i class="fas fa-3x" :class="radioToggle ? 'fa-toggle-on' : 'fa-toggle-off'"></i>
 								</a>
 							</div>
@@ -50,7 +50,7 @@
 
 			<div
 				id="speaker"
-				class="bg-dark flex-grow-1 d-flex flex-column justify-content-center align-items-center border rounded-lg text-center shadow p-4"
+				class="bg-primary flex-grow-1 d-flex flex-column justify-content-center align-items-center border rounded-lg text-center shadow p-4"
 				style="background-image: url('/textures/bo-play.png')"
 			>
 				<a @click="toggleSwitch()" title="ON / OFF" class="text-light">
@@ -63,20 +63,26 @@
 				class="d-flex flex-column flex-md-row justify-content-between align-items-center text-light my-3 m-md-0"
 			>
 				<div class="mt-1">
-					<i class="fas fa-phone-alt"></i>
-					<span>+234 818 8881 067,</span>
-					<span>(0)909 1111 049</span>
+					Made with &hearts; by
+					<a href="//hmmd.xyz" class="text-light font-weight-bold">OgbeniHMMD</a>
 				</div>
 				<div class="d-flex mt-4 mt-md-1">
-					<a href="https://twitter.com/1047SMAFM" class="text-light" title="Twitter">
+					<a href="https://twitter.com/Radiolagos1075" class="text-light" title="Twitter">
 						<i class="fab fa-twitter-square fa-2x"></i>
 					</a>
 					<a
 						title="Facebok"
-						class="mx-5 mx-md-4 text-light"
-						href="https://web.facebook.com/1047-SMA-FM-119944118571102"
+						class="ml-5 ml-md-4 text-light"
+						href="https://www.facebook.com/radiolagos.amititi.5"
 					>
 						<i class="fab fa-facebook-square fa-2x"></i>
+					</a>
+					<a
+						title="Instagram"
+						class="mx-5 mx-md-4 text-light"
+						href="https://www.instagram.com/radiolagos1075/"
+					>
+						<i class="fab fa-instagram-square fa-2x"></i>
 					</a>
 					<a href="https://github.com/OgbeniHMMD/SMA-fm" class="text-light" title="Github">
 						<i class="fab fa-github-square fa-2x"></i>
@@ -93,8 +99,6 @@ export default {
 		return {
 			radioToggle: false,
 			radioStatus: { waiting: false, title: "Welcome", msg: "Press play" },
-
-			//radioUrl: "/tones/test.mp3",
 			radioUrl: "https://ca7ssl.rcast.net/stream/61621.mp3"
 		};
 	},
@@ -129,7 +133,7 @@ export default {
 			this.radioStatus = {
 				waiting: false,
 				title: "On Air",
-				msg: "Your Learning Frequency"
+				msg: "Tiwa n Tiwa"
 			};
 		},
 

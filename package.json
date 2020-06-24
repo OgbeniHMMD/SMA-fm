@@ -1,7 +1,7 @@
 {
-  "name": "sma-fm",
-  "version": "0.0.3",
-  "description": "S.M.A 104.7FM — Your Learning Frequency!",
+  "name": "radio-lagos",
+  "version": "0.0.5",
+  "description": "Radio Lagos — 104.7 FM — Tiwa n Tiwa!",
   "author": "Olajide A. Hammed",
   "private": true,
   "scripts": {
