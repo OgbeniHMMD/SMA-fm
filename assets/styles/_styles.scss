@@ -1,7 +1,59 @@
-// show radio radius and border on tablet or bigger devices
+#radio {
+  @extend .bg-dark;
+  @extend .min-vh-100;
+  @extend .m-0, .my-auto;
+  @extend .align-items-center;
+  @extend .d-flex, .flex-column;
+  @extend .justify-content-center;
+  background: url("/textures/radiong_pp_2fd25dbbe6d6b5bdbca7636d9aa67298.png");
 
+  #radio-body {
+    @extend .shadow-lg;
+    @extend .bg-primary;
+    @extend .p-2, .p-md-4;
+    @extend .vh-100, .vh-md-75;
+    @extend .col-12, .col-md-10, .col-lg-8;
+    @extend .d-flex, .flex-column;
+    background-image: url("/textures/otis-redding.png");
+
+    #radio-status {
+      @extend .row;
+      @extend .w-100;
+      @extend .border;
+      @extend .shadow;
+      @extend .rounded-lg;
+      @extend .m-0, .mb-4;
+      @extend .bg-primary;
+      @extend .d-flex, .flex-column, .flex-md-row;
+      background-image: url("/textures/black-mamba.png");
+    }
+
+    #radio-speaker {
+      @extend .p-4;
+      @extend .shadow;
+      @extend .bg-primary;
+      @extend .text-center;
+      @extend .flex-grow-1; // make the flex-box fill the empty space
+      @extend .d-flex, .flex-column;
+      @extend .justify-content-center;
+      @extend .align-items-center;
+      @extend .border, .rounded-lg;
+      background-image: url("/textures/bo-play.png");
+    }
+
+    #radio-footer {
+      @extend .text-light;
+      @extend .my-3, .m-md-0;
+      @extend .align-items-center;
+      @extend .d-flex, .flex-column, .flex-md-row;
+      @extend .justify-content-between;
+    }
+  }
+}
+
+// show border on tablet or bigger devices
 @include media-breakpoint-up(md) {
-  #radio {
+  #radio-body {
     border-radius: 2rem !important;
     border: solid 0.3rem $border-color !important;
   }

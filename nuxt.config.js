@@ -1,8 +1,6 @@
 export default {
   mode: "universal",
-  /*
-   ** Headers of the page
-   */
+
   head: {
     title: process.env.npm_package_description,
     meta: [
@@ -16,42 +14,37 @@ export default {
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
-  /*
-   ** Customize the progress-bar color
-   */
-  loading: { color: "#fff" },
-  /*
-   ** Global CSS
-   */
+
+  loading: { color: "#141361" },
+
   css: [],
-  /*
-   ** Plugins to load before mounting the App
-   */
+
   plugins: [],
-  /*
-   ** Nuxt.js dev-modules
-   */
-  buildModules: [],
-  /*
-   ** Nuxt.js modules
-   */
-  modules: ["bootstrap-vue/nuxt", "@nuxtjs/pwa", "nuxt-webfontloader"],
+
+  buildModules: ["@nuxtjs/pwa"],
+
+  modules: ["bootstrap-vue/nuxt", "nuxt-webfontloader"],
+
   bootstrapVue: {
     bootstrapCSS: false,
     bootstrapVueCSS: false
   },
+
   webfontloader: {
     google: {
       families: ["Share+Tech+Mono&display=swap"]
     }
   },
-  /*
-   ** Build configuration
-   */
+
+  pwa: {
+    meta: {
+      nativeUI: true,
+      title: "Radio Lagos",
+      description: "Radio Lagos — 104.7 FM"
+    }
+  },
+
   build: {
-    /*
-     ** You can extend webpack config here
-     */
     extend(config, ctx) {}
   }
 };
