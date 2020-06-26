@@ -40,7 +40,8 @@ export default {
       name: "Radio Lagos — 104.7 FM",
       short_name: "Radio Lagos",
       display: "standalone",
-      description: "A simply readable Hacker News app."
+      description:
+        "[Unofficial] Internet Radio Player For Radio Lagos — 104.7 FM"
     }
   },
 
