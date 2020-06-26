@@ -15,11 +15,9 @@ export default {
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
 
-  loading: { color: "#141361" },
+  loading: { color: "#fff" },
 
-  buildModules: ["@nuxtjs/pwa"],
-
-  modules: ["bootstrap-vue/nuxt", "nuxt-webfontloader"],
+  modules: ["@nuxtjs/pwa", "bootstrap-vue/nuxt", "nuxt-webfontloader"],
 
   bootstrapVue: {
     bootstrapCSS: false,
@@ -34,9 +32,15 @@ export default {
 
   pwa: {
     meta: {
-      nativeUI: true,
       title: "Radio Lagos",
-      description: "Radio Lagos — 104.7 FM"
+      author: "Olajide A. Hammed"
+    },
+
+    manifest: {
+      name: "Radio Lagos — 104.7 FM",
+      short_name: "Radio Lagos",
+      display: "standalone",
+      description: "A simply readable Hacker News app."
     }
   },
 
