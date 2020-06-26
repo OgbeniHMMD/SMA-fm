@@ -17,10 +17,6 @@ export default {
 
   loading: { color: "#141361" },
 
-  css: [],
-
-  plugins: [],
-
   buildModules: ["@nuxtjs/pwa"],
 
   modules: ["bootstrap-vue/nuxt", "nuxt-webfontloader"],
@@ -46,5 +42,10 @@ export default {
 
   build: {
     extend(config, ctx) {}
+  },
+
+  generate: {
+    // Use'404.html'
+    fallback: true
   }
 };
