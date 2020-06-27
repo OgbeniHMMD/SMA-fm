@@ -49,7 +49,10 @@
 			<div id="radio-footer">
 				<div class="mt-1">
 					Made with &hearts; by
-					<a href="//hmmd.xyz" class="text-light font-weight-bold">OgbeniHMMD</a>
+					<a
+						href="https://www.hmmd.xyz"
+						class="text-light font-weight-bold"
+					>OgbeniHMMD</a>
 				</div>
 				<div class="d-flex mt-4 mt-md-1">
 					<a href="https://twitter.com/Radiolagos1075" class="text-light" title="Twitter">

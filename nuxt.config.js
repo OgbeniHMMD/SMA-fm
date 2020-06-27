@@ -15,7 +15,7 @@ export default {
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
 
-  loading: { color: "#fff" },
+  loading: { color: "#dde2e6" },
 
   modules: ["@nuxtjs/pwa", "bootstrap-vue/nuxt", "nuxt-webfontloader"],
 
