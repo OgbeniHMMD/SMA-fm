@@ -72,7 +72,7 @@
 					>
 						<i class="fab fa-instagram-square fa-2x"></i>
 					</a>
-					<a href="https://github.com/OgbeniHMMD/SMA-fm" class="text-light" title="Github">
+					<a href="https://github.com/OgbeniHMMD/radio-lagos" class="text-light" title="Github">
 						<i class="fab fa-github-square fa-2x"></i>
 					</a>
 				</div>
